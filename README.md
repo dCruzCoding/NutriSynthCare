@@ -123,6 +123,6 @@ Este proyecto está bajo la licencia MIT. Consulta el archivo [LICENSE](http://L
 Este proyecto ha sido desarrollado por:
 
 - [Daniel Cruz (dCruzCoding)](https://github.com/dCruzCoding)  
-- [Aníbal López](https://github.com/Aniballll)
+- [Aníbal García](https://github.com/Aniballll)
 
 ¡Gracias por visitar el repositorio!

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Informes de Salud</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 30px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            color: #0056b3;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #0056b3;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+        .form-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box; /* Incluye padding en el ancho */
+        }
+        input[type="range"] {
+            width: calc(100% - 10px);
+            margin-top: 10px;
+        }
+        .slider-value {
+            text-align: right;
+            font-weight: bold;
+            color: #0056b3;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            box-sizing: border-box;
+            margin-top: 15px;
+        }
+        button.create-button {
+            background-color: #28a745; /* Green for create */
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        .note {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #777;
+            text-align: center;
+        }
+        #imc_result {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #0056b3;
+        }
+        .divider {
+            border-top: 1px dashed #ccc;
+            margin: 40px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>HarmonIA</h1>
+        <h3>Sistema de Salud y Nutrición</h3>
+
+        <!-- Sección para Buscar Paciente Existente -->
+        <div class="form-section">
+            <h2>Buscar Paciente Existente</h2>
+            <form action="/report" method="post">
+                <div class="form-group">
+                    <label for="patient_id">ID del Paciente (Ej: P0000 - P16000):</label>
+                    <input type="text" id="patient_id" name="patient_id" placeholder="Por ejemplo: P0001" required>
+                </div>
+                <button type="submit">Generar Informe Existente</button>
+                <p class="note">
+                    Para probar, puedes usar IDs de paciente como P0000 hasta P0498, que corresponden a las filas de tu `dbfinal_precov_COMPLETA.csv`.
+                </p>
+            </form>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Sección para Crear Nuevo Paciente -->
+        <div class="form-section">
+            <h2>Crear Nuevo Paciente</h2>
+            <form action="/process_new_patient" method="post">
+                <div class="form-group">
+                    <label for="sexo">Sexo:</label>
+                    <select id="sexo" name="sexo" required>
+                        <option value="">-- Seleccionar --</option>
+                        <option value="Hombre">Hombre</option>
+                        <option value="Mujer">Mujer</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="edad">Edad:</label>
+                    <input type="number" id="edad" name="edad" min="1" max="120" placeholder="Ej: 35" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="peso">Peso (kg):</label>
+                    <input type="number" id="peso" name="peso" step="0.1" min="1" max="300" placeholder="Ej: 70.5" required oninput="calculateBMI()">
+                </div>
+
+                <div class="form-group">
+                    <label for="altura">Altura (cm):</label>
+                    <input type="number" id="altura" name="altura" step="1" min="10" max="300" placeholder="Ej: 175" required oninput="calculateBMI()">
+                </div>
+
+                <div class="form-group">
+                    <label>IMC Calculado:</label>
+                    <span id="imc_result"></span>
+                    <input type="hidden" id="imc_hidden" name="imc"> <!-- Campo oculto para enviar el IMC a Flask -->
+                </div>
+
+                <div class="form-group">
+                    <label for="nivel_estres">Nivel de Estrés:</label>
+                    <input type="range" id="nivel_estres" name="nivel_estres" min="1" max="5" value="3" oninput="this.nextElementSibling.value = this.value">
+                    <output class="slider-value">3</output> <!-- Muestra el valor del slider -->
+                </div>
+
+                <div class="form-group">
+                    <label for="diabetes">¿Tiene Diabetes?</label>
+                    <select id="diabetes" name="diabetes" required>
+                        <option value="">-- Seleccionar --</option>
+                        <option value="1">Sí</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="actividad_fisica">Nivel de Actividad Física:</label>
+                    <select id="actividad_fisica" name="actividad_fisica" required>
+                        <option value="">-- Seleccionar --</option>
+                        <option value="Sedentario">Sedentario</option>
+                        <option value="Moderado">Moderado</option>
+                        <option value="Activo">Activo</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="create-button">Generar Informe para Nuevo Paciente</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Función para calcular el IMC
+        function calculateBMI() {
+            const weight = parseFloat(document.getElementById('peso').value);
+            const height = parseFloat(document.getElementById('altura').value); // en cm
+
+            if (weight > 0 && height > 0) {
+                const height_m = height / 100; // Convertir cm a metros
+                const bmi = (weight / (height_m * height_m)).toFixed(2);
+                document.getElementById('imc_result').textContent = bmi;
+                document.getElementById('imc_hidden').value = bmi; // Actualizar campo oculto
+            } else {
+                document.getElementById('imc_result').textContent = 'N/A';
+                document.getElementById('imc_hidden').value = '';
+            }
+        }
+
+        // Muestra el valor inicial del slider al cargar la página
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const slider = document.getElementById('nivel_estres');
+            const output = slider.nextElementSibling;
+            output.value = slider.value;
+
+            // También calcula el IMC inicial si ya hay valores
+            calculateBMI();
+        });
+    </script>
+</body>
+</html>

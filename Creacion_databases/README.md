@@ -123,19 +123,19 @@ Este directorio contiene los siguientes notebooks, organizados por fases del pro
 * [`3.3_Imputacion4_RandomForest.ipynb`](./3.3_Imputacion4_RandomForest.ipynb)
   → Imputación específica de la variable `Tipo_Diabetes` con modelos **Random Forest**.
 
-* [`3.4_ImputacionFinal_RiesgoCardiovascular.ipynb`](./4_ImputacionFinal_RiesgoCardiovascular.ipynb)
+* [`3.4_ImputacionFinal_RiesgoCardiovascular.ipynb`](./3.4_ImputacionFinal_RiesgoCardiovascular.ipynb)
   → Imputación de la variable **`Riesgo_Cardiovascular`**, considerada como **target principal** del dataset.
 
 ---
 
 ### 🧠 4. Imputación con Redes Neuronales
 
-📁 [`Probando_RN/`](./Probando_RN)
+📁 [`Probando_RNs/`](./Probando_RNs)
 
-* [`4.1_Imputando_RiesgoCardio_con_RNN.ipynb`](./Probando_RN/5_Imputando_RiesgoCardio_con_RNN.ipynb)
+* [`4.1_Imputando_RiesgoCardio_con_RNN.ipynb`](./Probando_RNs/4.1_Imputando_RiesgoCardio_con_RNN.ipynb)
   → Imputación de `Riesgo_Cardiovascular` utilizando **Redes Neuronales Recurrentes (RNN)**.
 
-* [`4.2_Imputando_ALL_con_MICE-NN.ipynb`](./Probando_RN/6_Imputando_ALL_con_MICE-NN.ipynb)
+* [`4.2_Imputando_ALL_con_MICE-NN.ipynb`](./Probando_RNs/4.2_Imputando_ALL_con_MICE-NN.ipynb)
   → Imputación de **todas las variables** mediante el enfoque **MICE-NN** (Multiple Imputation by Chained Equations con redes neuronales).
 
 > ⚠️ **¡OJO!**

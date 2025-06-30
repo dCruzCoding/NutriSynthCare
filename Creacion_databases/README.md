@@ -126,6 +126,9 @@ Este directorio contiene los siguientes notebooks, organizados por fases del pro
 * [`3.4_ImputacionFinal_RiesgoCardiovascular.ipynb`](./3.4_ImputacionFinal_RiesgoCardiovascular.ipynb)
   → Imputación de la variable **`Riesgo_Cardiovascular`**, considerada como **target principal** del dataset.
 
+* [`3.5_Reescalado_varNormalizadas.ipynb`](./3.5_Reescalado_varNormalizadas.ipynb)
+  → Reescalado, según cohorte, de variables que fueron normalizadas para facilitar el proceso de unión de ambas databases.
+
 ---
 
 ### 🧠 4. Imputación con Redes Neuronales

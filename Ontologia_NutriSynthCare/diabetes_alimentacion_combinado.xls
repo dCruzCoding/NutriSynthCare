@@ -1,4 +1,0 @@
-Año_Registro,Edad,Sexo,Ingresos_Anuales,Nivel_Estres,Actividad_Fisica,IMC,Diabetes,HbA1c,region,Fruta fresca,Carne,Pescado,Verduras y hortalizas,Score_Alimentacion_Saludable,Grupo_Edad
-2020,45,M,50000,3,4,28.5,1,6.8,Norte,3,4,2,5,3.3333333333333335,Adulto
-2021,60,F,75000,5,2,32.1,1,7.2,Sur,5,3,4,4,4.333333333333333,Mayor
-2022,35,M,30000,2,5,25.3,0,5.4,Este,2,5,1,3,2.0,Adulto

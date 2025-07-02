@@ -84,11 +84,11 @@ pip install -r requirements.txt
 
 ## 🧾 Versión
 
-v1.1 · Última actualización: junio de 2025
+v1.0.0 · Última actualización: junio de 2025
 
-## 🚀 Próximas Mejoras: Versión 1.2
+## 🚀 Próximas Mejoras *(potenciales)*
 
-El desarrollo de NutriSynthCare continúa. Estas son las principales líneas de mejora previstas:
+Actualmente no hay una nueva versión en desarrollo, pero si se decidiera continuar con el proyecto, estas serían algunas de las líneas de mejora que podrían explorarse:
 
 - 🗓️ **Adaptación post-COVID**  
   Incorporar cambios en los perfiles clínicos y patrones de salud tras la pandemia.
